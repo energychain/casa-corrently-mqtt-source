@@ -31,6 +31,21 @@ const boot = async function() {
   }
   await main.server(config);
 
+  let msg = {
+    payload: {},
+    topic: 'statistics'
+  };
+  const storage = {
+    memstorage:{},
+    get:function(key) {
+      return this.memstorage[key];
+    },
+    set:function(key,value) {
+      this.memstorage[key] = value;
+    }
+  };
+  main.meterLib(msg,config,storage);
+
   if(doupdates) {
     //const updater = require("simple-dependencies-updater");
     //updater();
