@@ -16,10 +16,11 @@
    "stromkonto":"0xE99c34770d3Fa7F24830F5a16D1D2B4122179394",
    "depot":"0xc52828d0e92465d27FaA02687e69B2e7D7D27Fe8",
    "source":"./index.js",
-   "mqtt_feedin_topic": "/storage/p1",
-   "mqtt_feedout_topic": "/storage/p2",
+   "mqtt_feedin_topic": "/casa/energy",
+   "mqtt_feedout_topic": "/casa/energyOut",
    "mqtt_prod_topic": "/storage/p3",
    "mqtturl": "tcp://192.168.192.31:1024/",
+   "scaleFactor": 1,
    "zip":"69256",
    "port":3001
 }
