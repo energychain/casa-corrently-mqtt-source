@@ -1,0 +1,3 @@
+{
+  "dependencies": { "casa-corrently": "1.0.7", "mqtt": "4.2.1", "simple-dependencies-updater": "0.9.4" }
+}

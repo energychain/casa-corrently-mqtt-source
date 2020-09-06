@@ -1,0 +1,30 @@
+{
+  "name": "casa-corrently-mqtt-source",
+  "version": "1.0.0",
+  "description": "Casa Corrently Source Driver for MQTT enabled meters",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/energychain/casa-corrently-mqtt-source.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/energychain/casa-corrently-mqtt-source/issues"
+  },
+  "homepage": "https://github.com/energychain/casa-corrently-mqtt-source#readme",
+  "dependencies": {
+    "async-mqtt": "^2.6.1",
+    "casa-corrently": "^1.0.7",
+    "md5": "^2.3.0",
+    "mqtt": "^4.2.1",
+    "nodemon": "^2.0.4",
+    "simple-dependencies-updater": "^0.9.4"
+  },
+  "devDependencies": {
+    "mocha": "^8.1.3"
+  }
+}
