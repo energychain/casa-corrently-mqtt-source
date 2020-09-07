@@ -90,9 +90,7 @@ module.exports = {
           });
           if(typeof fieldout !== 'undefined') {
               let energy_dataout = await client(node,fieldout,from,to);
-              if(result.length < 1 ) {
-                  resolve(responds);
-              } else {
+              if((typeof energy_dataout == 'undefined')||(energy_dataout == null) || (energy_dataout.length <1)||(typeof energy_dataout[0] == 'undefined')) resolve([]); else {
                   responds[0].values.energyOut = Math.round(energy_dataout[0].obj.energy * scaleFactor);
                   responds[1].values.energyOut = Math.round(energy_dataout[0].obj.energy * scaleFactor);
                   resolve(responds);
