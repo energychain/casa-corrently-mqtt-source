@@ -4,8 +4,8 @@
    "z":"df3cbd7e.4769e",
    "name":"Corrently Demozähler",
    "account":"d8a36357.01efd",
-   "meterId":"mqtt-feedin",
-   "prodMeterId":"mqtt-prod",
+   "meterId":"mqtt_feedin_topic",
+   "prodMeterId":"mqtt_prod_topic",
    "firstReading":0,
    "firstReadingOut":0,
    "firstReadingDate":"2019-10-01",
@@ -20,7 +20,7 @@
    "mqtt_feedout_topic": "/casa/energyOut",
    "mqtt_prod_topic": "/storage/p3",
    "mqtturl": "tcp://192.168.192.31:1024/",
-   "scaleFactor": 1,
+   "scaleFactor": 100000000,
    "zip":"69256",
-   "port":3001
+   "port":3002
 }
