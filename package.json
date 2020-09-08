@@ -19,7 +19,7 @@
   "homepage": "https://github.com/energychain/casa-corrently-mqtt-source#readme",
   "dependencies": {
     "async-mqtt": "^2.6.1",
-    "casa-corrently": "^1.0.7",
+    "casa-corrently": "^1.0.9",
     "md5": "^2.3.0",
     "mqtt": "^4.2.1",
     "nodemon": "^2.0.4",

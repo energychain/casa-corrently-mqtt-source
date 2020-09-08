@@ -11,7 +11,7 @@ module.exports = async function(keyname) {
       const fileExists = async path => !!(await fs.promises.stat(path).catch(e => false));
 
       const persist = async function(dbidx) {
-        console.log("Persisting DB ",dbidx);
+        console.log("Persisting DB ",dbidx,new Date(db[dbidx][0].timeStamp));
         fs.writeFileSync("data_"+md5(keyname)+"_"+dbidx+".json",JSON.stringify(db[dbidx]));
       }
 
