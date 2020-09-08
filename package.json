@@ -4,7 +4,7 @@
   "description": "Casa Corrently Source Driver for MQTT enabled meters",
   "main": "index.js",
   "scripts": {
-    "start": "npm install; node standalone.js"
+    "start": "npm install; node standalone.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
