@@ -10,7 +10,7 @@ const client = async function(node,topic,from,to) {
           _connection = await MQTT.connectAsync(node.config.mqtturl);
           _connection.on('message', async function (topic, message) {
             console.log("Received message for ",topic);
-            console.log("message ", message);
+            _data[topic] = [];
             await _data[topic].push({
               energy:(message.toString())*1
             });
@@ -28,7 +28,9 @@ const client = async function(node,topic,from,to) {
       if(typeof _data[topic] == "undefined") {
         _data[topic] = await retentiondb(topic);
       }
-      return await _data[topic].retrieve(from,to);
+      console.log("datatopic", _data, topic);
+      // return await _data[topic].retrieve(from,to);
+      return _data[topic];
 }
 
 
@@ -36,8 +38,7 @@ module.exports = {
   last_reading: function(meterId,node) {
       return new Promise(async function (resolve, reject)  {
         let fieldin = node.config.mqtt_feedin_topic;
-        let fieldout = node.config.mqtt_feedout_topic;
-
+        console.log("fieldin", fieldin);
         if(meterId == 'mqtt_prod_topic') {
           fieldin = node.config.mqtt_prod_topic_topic;
           delete fieldout;
@@ -45,16 +46,18 @@ module.exports = {
 
         let scaleFactor = 1000*10000000;
         if((typeof node.config !== 'undefined') && (typeof node.config.scaleFactor !== 'undefined')) scaleFactor = node.config.scaleFactor;
-        let energy_data = await client(node,fieldin);
-        let energyout_data = await client(node,fieldout);
-        if((typeof energy_data == "undefined")||(energy_data==null)) resolve({timeStamp:0,values:{energy:0,power:0,power1:0,power2:0,power3:0,energyOut:0}}); else {
+        let energy_data = await client(node,"openWB/evu/WhImported");
+        console.log("energy_Data", energy_data);
+        let energyout_data = await client(node, "openWB/evu/WhExported");
+        if((typeof energy_data == "undefined")) resolve({timeStamp:0,values:{energy:0,power:0,power1:0,power2:0,power3:0,energyOut:0}}); else {
           let responds = {
-              time: energy_data.timeStamp,
+              time: new Date().getTime(),
               values: {
-                energy: Math.round(energy_data.obj.energy * scaleFactor),
-                energyOut: Math.round(energyout_data.obj.energy * scaleFactor)
+                energy: Math.round(energy_data[0].energy * scaleFactor),
+                energyOut: Math.round(energyout_data[0].energy * scaleFactor)
               }
           };
+          console.log("RESPONSE", responds);
           resolve(responds);
         }
     });
@@ -74,7 +77,8 @@ module.exports = {
 
       if((typeof node.config !== 'undefined') && (typeof node.config.scaleFactor !== 'undefined')) scaleFactor = node.config.scaleFactor;
         let energy_data = await client(node,fieldin,from,to);
-        if((typeof energy_data == 'undefined')||(energy_data == null) || (energy_data.length <1)||(typeof energy_data[0] == 'undefined')) resolve([]); else {
+        if((typeof energy_data == 'undefined')||(energy_data == null) || (energy_data.length <1)||(typeof energy_data[0] == 'undefined')
+        ||(typeof energy_data[0].obj == 'undefined')) resolve([]); else {
           responds.push({
               time: energy_data[0].timeStamp,
               values: {
