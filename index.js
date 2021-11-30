@@ -10,6 +10,7 @@ const client = async function(node,topic,from,to) {
           _connection = await MQTT.connectAsync(node.config.mqtturl);
           _connection.on('message', async function (topic, message) {
             console.log("Received message for ",topic);
+            console.log("message ", message);
             await _data[topic].push({
               energy:(message.toString())*1
             });
